@@ -141,6 +141,11 @@ export class GitpodTableDescriptionProvider implements TableDescriptionProvider 
             primaryKeys: ['id'],
             timeColumn: '_lastModified',
         },
+        {
+            name: 'd_b_code_sync_resource',
+            primaryKeys: ['userId','kind','rev'],
+            timeColumn: 'created',
+        },
     ]
 
     public getSortedTables(): TableDescription[] {
