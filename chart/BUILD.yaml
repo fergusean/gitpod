@@ -14,9 +14,9 @@ packages:
       - imageRepoBase
     config:
       commands:
-        # set values
-        - ["yq", "w", "-i", "Chart.yaml", "version", "${version}"]
-        - ["yq", "w", "-i", "values.yaml", "version", "${version}"]
+        # set values. Use the value in values.yaml:.version as ${version}
+        - ["sh", "-c", "yq w -i Chart.yaml version $(yq r values.yaml version)"]
+        # - ["yq", "w", "-i", "values.yaml", "version", "${version}"]
         - ["yq", "w", "-i", "values.yaml", "imagePrefix", "${imageRepoBase}/"]
         # prepare chart
         - ["sh", "-c", "ls -A | grep -v BUILD.yaml | grep -v original_files > original_files.txt"]
