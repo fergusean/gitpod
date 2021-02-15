@@ -89,5 +89,6 @@ export namespace AdminLinks {
     readonly instanceId: string;
     readonly podName?: string;
     readonly nodeName?: string;
+    readonly nodeIp?: string;
   }
 }
