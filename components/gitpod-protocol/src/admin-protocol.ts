@@ -22,6 +22,8 @@ export interface AdminServer {
     adminForceStopWorkspace(id: string): Promise<void>;
 
     adminSetLicense(key: string): Promise<void>;
+
+    adminGetAdminLinks(): Promise<AdminLinks>;
 }
 
 export interface AdminGetListRequest<T> {
@@ -68,4 +70,24 @@ export interface WorkspaceAndInstance extends Without<Workspace, "id"|"creationT
 
 export interface AdminGetWorkspacesRequest extends AdminGetListRequest<WorkspaceAndInstance> {
     ownerId?: string
+}
+
+export interface AdminLinks {
+  readonly links: {
+    readonly workspace?: AdminLinks.Link[]
+  }
+}
+
+export namespace AdminLinks {
+  export interface Link {
+    readonly name: string;
+    // Supports all variables from UrlTemplateContext
+    readonly urlTemplate: string;
+  }
+  export interface UrlTemplateContext {
+    readonly workspaceId: string;
+    readonly instanceId: string;
+    readonly podName?: string;
+    readonly nodeName?: string;
+  }
 }

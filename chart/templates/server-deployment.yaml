@@ -188,6 +188,8 @@ spec:
               key: auth-providers.json
         - name: BRANDING_CONFIG
           value: {{ .Values.branding | toJson | quote }}
+        - name: ADMIN_LINKS
+          value: {{ .Values.admin | toJson | quote }}
     {{- if $comp.runDbDeleter }}
         - name: RUN_DB_DELETER
           value: {{ $comp.runDbDeleter | quote }}

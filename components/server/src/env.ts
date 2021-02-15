@@ -11,7 +11,7 @@ import { AbstractComponentEnv, getEnvVar } from '@gitpod/gitpod-protocol/lib/env
 import { AuthProviderParams, parseAuthProviderParamsFromEnv } from './auth/auth-provider';
 
 import * as fs from "fs";
-import { Branding, NamedWorkspaceFeatureFlag, WorkspaceFeatureFlags } from '@gitpod/gitpod-protocol';
+import { Branding, NamedWorkspaceFeatureFlag, WorkspaceFeatureFlags, AdminLinks } from '@gitpod/gitpod-protocol';
 
 import { BrandingParser } from './branding-parser';
 
@@ -182,4 +182,10 @@ export class Env extends AbstractComponentEnv {
 
     readonly runDbDeleter: boolean = getEnvVar('RUN_DB_DELETER', 'false') === 'true';
 
+
+    readonly adminLinks = this.parseAdminLinks();
+    protected parseAdminLinks(): AdminLinks {
+        const envVar = getEnvVar('ADMIN_LINKS');
+        return JSON.parse(envVar);
+    }
 }
